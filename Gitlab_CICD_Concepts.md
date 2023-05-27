@@ -274,24 +274,30 @@ Gitlab has two options,
 - Gitlab server assigns these jobs to the available runners.
 
 ### Executors
+The type of executor defines the environment in which the job gets executed.
+
 ![](Pasted%20image%2020230521175414.png)
 **Shell executor**
 - The simplet executor
-**Disadvantages** 
+- Executes the job on the OS of the server directly
+- 
+	**Disadvantages with shell executor** 
 	- All the required programs for executing the jobs,need to be installed manually.
 	- ex: if you want to run docker command, docker need to be installed first.
 	- No clean build environment for every job execution, needs manual cleanup.
 
-**Alternative executors**
-There are several executors available, and you can choose your executor, while registering a runner.
+	**Alternative executors**
+	There are several executors available, and you can choose your executor, while registering a runner.
 
 #### Docker Executor
 - Commands are executed inside a container.
 - Jobs run on user provided docker images
 - All the needed tools can be put in the container image.
+
 #### K8s executor
 - Allows you to use an existing k8s cluster for your builds.
 - K8s executor will create a new  pod for each gitlab job.
+
 #### Docker machine executor
 - Special version of the docker executor.
 - supports auto-scaling.
@@ -302,9 +308,25 @@ There are several executors available, and you can choose your executor, while r
 - Gitlab's shared runners are using docker machine executor.
 - Docker machine has been deprecated by docker.
 - Gitlab may replace it in the future.
+
 #### SSH Executor
 - least supported among all executors.
 - It makes gitlab connect to an external server and run jobs there.
+
 #### Parallel executor
 - Parllel is one of the two virtual machine executors, other is virtual box.
+
+#### VM executor
+- Executes job in already created VM
+- 
 ### Selecting the executor
+...
+
+![](Pasted%20image%2020230527185643.png)
+
+Shared: Available to all groups and projects in GitLab instance
+Specific: Associated with specific projects
+Group: Available to all projects in a group
+
+**Note:** Gitlab admi Create and register the runners.
+          Developers/Devops engineers refer to the runners in pipelines using tags.
